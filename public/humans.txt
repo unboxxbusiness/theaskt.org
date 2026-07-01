@@ -1,0 +1,20 @@
+/* TEAM */
+Developer: TheAskt Engineering Team
+Contact: contact@theaskt.com
+Location: India
+
+/* SITE */
+Last update: 2025/07
+Doctype: HTML5
+IDE: Cursor / VS Code
+Language: English
+
+/* TECHNOLOGY */
+Framework: Next.js (App Router)
+CMS: Sanity
+Database: Firebase Firestore
+Hosting: Vercel
+Styling: Tailwind CSS
+
+/* THANKS */
+Open source community, Sanity.io, Vercel, Firebase

@@ -1,0 +1,6 @@
+Contact: mailto:security@theaskt.com
+Expires: 2027-01-01T00:00:00.000Z
+Acknowledgements: https://theaskt.com/acknowledgements
+Preferred-Languages: en
+Policy: https://theaskt.com/security-policy
+Canonical: https://theaskt.com/.well-known/security.txt

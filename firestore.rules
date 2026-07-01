@@ -1,0 +1,111 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ==========================================
+    // HELPER FUNCTIONS
+    // ==========================================
+    
+    // Check if value is a string with length between minLen and maxLen
+    function isValidString(val, minLen, maxLen) {
+      return val is string && val.size() >= minLen && val.size() <= maxLen;
+    }
+
+    // Check if value is a valid email format
+    function isValidEmail(email) {
+      return email is string && email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
+    }
+
+    // Check if value is a valid phone number length
+    function isValidPhone(phone) {
+      return phone is string && phone.size() >= 5 && phone.size() <= 25;
+    }
+
+    // ==========================================
+    // COLLECTION RULES
+    // ==========================================
+
+    // 1. Contact Form Submissions
+    match /contactMessages/{messageId} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'subject', 'message', 'timestamp'])
+        && isValidString(request.resource.data.name, 2, 100)
+        && isValidEmail(request.resource.data.email)
+        && isValidString(request.resource.data.subject, 1, 150)
+        && isValidString(request.resource.data.message, 10, 5000)
+        && isValidString(request.resource.data.timestamp, 10, 50);
+      allow read, update, delete: if false; // Only admin SDK (backend) can read/update/delete
+    }
+
+    // 2. Newsletter Subscribers
+    match /newsletterSubscribers/{subId} {
+      allow create: if request.resource.data.keys().hasAll(['email', 'timestamp'])
+        && isValidEmail(request.resource.data.email)
+        && isValidString(request.resource.data.timestamp, 10, 50)
+        && (!request.resource.data.keys().hasAny(['name']) || isValidString(request.resource.data.name, 1, 100));
+      allow read, update, delete: if false;
+    }
+
+    // 3. Brochure Downloads (supports both static and career page forms)
+    match /brochureDownloads/{downloadId} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'timestamp'])
+        && isValidString(request.resource.data.name, 1, 100)
+        && isValidEmail(request.resource.data.email)
+        && isValidString(request.resource.data.timestamp, 10, 50)
+        && (!request.resource.data.keys().hasAny(['phone']) || isValidPhone(request.resource.data.phone))
+        && (!request.resource.data.keys().hasAny(['status']) || isValidString(request.resource.data.status, 1, 100));
+      allow read, update, delete: if false;
+    }
+
+    // 4. Career Session Bookings
+    match /careerSessionBookings/{bookingId} {
+      allow create: if request.resource.data.keys().hasAll([
+          'name', 'email', 'phone', 'status', 'qualification', 
+          'city', 'interest', 'goals', 'mode', 'date', 'time', 'timestamp'
+        ])
+        && isValidString(request.resource.data.name, 2, 100)
+        && isValidEmail(request.resource.data.email)
+        && isValidPhone(request.resource.data.phone)
+        && isValidString(request.resource.data.status, 1, 100)
+        && isValidString(request.resource.data.qualification, 2, 150)
+        && (!request.resource.data.keys().hasAny(['occupation']) || isValidString(request.resource.data.occupation, 0, 150))
+        && isValidString(request.resource.data.city, 2, 100)
+        && isValidString(request.resource.data.interest, 1, 150)
+        && isValidString(request.resource.data.goals, 10, 2000)
+        && isValidString(request.resource.data.mode, 1, 50)
+        && isValidString(request.resource.data.date, 1, 50)
+        && isValidString(request.resource.data.time, 1, 50)
+        && isValidString(request.resource.data.timestamp, 10, 50);
+      allow read, update, delete: if false;
+    }
+
+    // 5. Push Notification Subscriber Tokens
+    match /pushSubscribers/{tokenId} {
+      allow create: if request.resource.data.keys().hasAll(['token', 'timestamp', 'status'])
+        && isValidString(request.resource.data.token, 10, 500)
+        && request.resource.data.status in ['subscribed', 'unsubscribed']
+        && isValidString(request.resource.data.timestamp, 10, 50);
+      // Read access is allowed because the lightweight serverless backend queries 
+      // active subscribers using an unauthenticated REST API endpoint.
+      allow read: if true;
+      allow update, delete: if false;
+    }
+
+    // 6. Notifications Queue (FCM fallback queue)
+    match /notificationsQueue/{notificationId} {
+      allow create: if request.resource.data.keys().hasAll(['title', 'body', 'clickUrl', 'timestamp', 'status', 'recipientCount'])
+        && isValidString(request.resource.data.title, 1, 200)
+        && isValidString(request.resource.data.body, 1, 500)
+        && isValidString(request.resource.data.clickUrl, 1, 500)
+        && isValidString(request.resource.data.timestamp, 10, 50)
+        && request.resource.data.status == 'queued'
+        && isValidString(request.resource.data.recipientCount, 1, 10);
+      allow read, update, delete: if false;
+    }
+
+    // Default deny rule for any other collection/access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
