@@ -97,6 +97,7 @@ export default function Navbar({ settings }: NavbarProps) {
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMobileDropdown, setActiveMobileDropdown] = useState<number | null>(null);
+  const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -111,6 +112,7 @@ export default function Navbar({ settings }: NavbarProps) {
   useEffect(() => {
     setMobileMenuOpen(false);
     setActiveMobileDropdown(null);
+    setMobileSettingsOpen(false);
   }, [pathname]);
 
   /* ponytail: refactored Header to Navbar aligning with clean layout specifications */
@@ -226,8 +228,6 @@ export default function Navbar({ settings }: NavbarProps) {
                   <Search className="h-4.5 w-4.5" />
                 </button>
                 
-                <ReadingPreferences />
-
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   aria-expanded={mobileMenuOpen}
@@ -246,14 +246,14 @@ export default function Navbar({ settings }: NavbarProps) {
       {/* Mobile Drawer Underlay (Backdrop) */}
       {mobileMenuOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black/45 backdrop-blur-xs md:hidden transition-all duration-300"
+          className="fixed inset-0 z-[70] bg-black/45 backdrop-blur-xs md:hidden transition-all duration-300"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
       {/* Mobile Drawer Panel (Slide over from right) */}
       <div 
-        className={`fixed top-0 right-0 bottom-0 z-50 w-[75%] max-w-[300px] bg-bg-card border-l border-border-primary flex flex-col p-6 shadow-2xl transition-transform duration-350 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 bottom-0 z-[80] w-[75%] max-w-[300px] bg-bg-card border-l border-border-primary flex flex-col p-6 shadow-2xl transition-transform duration-350 ease-in-out md:hidden ${
           mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -315,6 +315,22 @@ export default function Navbar({ settings }: NavbarProps) {
                 </div>
               );
             })}
+            {/* Reading Settings Accordion */}
+            <div className="border-b border-border-primary/40 pb-2.5">
+              <button
+                onClick={() => setMobileSettingsOpen(!mobileSettingsOpen)}
+                suppressHydrationWarning
+                className="flex w-full items-center justify-between text-left font-sans text-sm font-semibold text-text-h hover:text-link transition-colors cursor-pointer py-1"
+              >
+                <span>Reading Settings</span>
+                <ChevronDown className={`h-4 w-4 transition-transform duration-250 ${mobileSettingsOpen ? 'rotate-180 text-link' : 'text-text-muted'}`} />
+              </button>
+              {mobileSettingsOpen && (
+                <div className="pl-3 border-l border-border-primary pt-2.5 ml-0.5 animate-fade-in">
+                  <ReadingPreferences isInline={true} />
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Drawer Footer */}

@@ -20,6 +20,10 @@ interface FooterProps {
       }>;
     }>;
   } | null;
+  categories?: Array<{
+    name: string;
+    slug: string;
+  }>;
 }
 
 function getSocialIcon(platform: string) {
@@ -67,34 +71,28 @@ function getSocialIcon(platform: string) {
   }
 }
 
-export default function Footer({ settings }: FooterProps) {
+export default function Footer({ settings, categories = [] }: FooterProps) {
   const pathname = usePathname();
 
   if (pathname?.startsWith('/studio')) return null;
 
-  const rawColumns = settings?.footerLinks || [
-    {
-      heading: "Platform",
-      links: [
-        { label: "Learn Hub", url: "/learn" },
-        { label: "AI Career Program™", url: "/career-program" },
-        { label: "Book Session", url: "/book-session" },
-        { label: "Brochure", url: "/career-program#brochure-section" }
-      ]
-    },
-    {
-      heading: "Company",
-      links: [
-        { label: "About Us", url: "/about" },
-        { label: "Contact", url: "/contact" },
-        { label: "Privacy Policy", url: "/privacy-policy" },
-        { label: "Terms of Use", url: "/terms-of-use" }
-      ]
-    }
-  ];
+  const categoriesColumn = categories.length > 0 ? {
+    heading: "Categories",
+    links: categories.map((cat) => ({
+      label: cat.name,
+      url: `/learn/category/${cat.slug}`
+    }))
+  } : null;
+
+  const rawColumns = settings?.footerLinks || [];
+
+  const combinedColumns = [...rawColumns];
+  if (categoriesColumn) {
+    combinedColumns.push(categoriesColumn);
+  }
 
   /* ponytail: dynamically extend Platform menu columns with PWA install links */
-  const footerColumns = rawColumns.map((col) => {
+  const footerColumns = combinedColumns.map((col) => {
     if (col.heading === "Platform") {
       const hasInstall = col.links.some((l) => l.label === "Install App");
       if (!hasInstall) {

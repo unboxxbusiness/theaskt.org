@@ -12,7 +12,7 @@ import InstallBanner from "@/components/shared/InstallBanner";
 import VersionNotification from "@/components/shared/VersionNotification";
 import FocusModeOverlay from "@/components/shared/FocusModeOverlay";
 import Analytics from "@/components/shared/Analytics";
-import { getCachedSiteSettings, getCachedAnnouncements } from "@/lib/sanity";
+import { getCachedSiteSettings, getCachedAnnouncements, getCachedCategories } from "@/lib/sanity";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -102,6 +102,7 @@ export default async function RootLayout({
 }>) {
   const settings = await getCachedSiteSettings();
   const announcements = await getCachedAnnouncements();
+  const categories = await getCachedCategories();
   const activeAnnouncement = announcements?.[0];
 
   /* ponytail: structured announcement, navbar, main viewport and footer wrapper */
@@ -131,7 +132,7 @@ export default async function RootLayout({
           <AnnouncementBar announcement={activeAnnouncement} />
           <Navbar settings={settings} />
           <main className="flex-1 flex flex-col">{children}</main>
-          <Footer settings={settings} />
+          <Footer settings={settings} categories={categories} />
           <NewsletterPopup />
           <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-4 items-end">
             <FcmInitializer />

@@ -1,6 +1,6 @@
 import { createClient } from 'next-sanity';
 import { cache } from 'react';
-import { siteSettingsQuery, activeAnnouncementsQuery, homepageQuery } from './queries';
+import { siteSettingsQuery, activeAnnouncementsQuery, homepageQuery, categoriesQuery } from './queries';
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'lg2rm1yc',
@@ -70,5 +70,9 @@ export const getCachedAnnouncements = cache(async () => {
 
 export const getCachedHomepage = cache(async () => {
   return client.fetch(homepageQuery).catch(() => null);
+});
+
+export const getCachedCategories = cache(async () => {
+  return client.fetch(categoriesQuery).catch(() => []);
 });
 
