@@ -64,7 +64,7 @@ export default function SearchDialog({ isOpen, onClose }: { isOpen: boolean; onC
 
   /* ponytail: refactored GlobalSearch into SearchDialog layout matching modal z-indices */
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 backdrop-blur-xs p-4 pt-20">
+    <div className="fixed inset-0 z-[90] flex items-start justify-center bg-black/60 backdrop-blur-xs p-4 pt-20">
       <div className="absolute inset-0" onClick={onClose} />
       <div className="w-full max-w-lg rounded-xl border border-border-primary bg-bg-card shadow-2xl overflow-hidden animate-fade-in relative z-10">
         <div className="flex items-center gap-3 border-b border-border-primary px-4 py-3 bg-bg-secondary text-text-h">
