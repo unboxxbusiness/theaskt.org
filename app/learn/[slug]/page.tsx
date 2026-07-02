@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import type { Metadata } from 'next';
-import { client } from '@/lib/sanity';
+import { client, getSanityImageUrl } from '@/lib/sanity';
 import { contentDetailQuery } from '@/lib/queries';
 import NewsletterForm from '@/components/forms/NewsletterForm';
 import { notFound } from 'next/navigation';
@@ -233,14 +233,8 @@ function CustomPortableText({ value }: { value: any[] | null | undefined }) {
         }
 
         // Render dynamic image block from Sanity CDN
-        if (block._type === 'image' && block.asset?._ref) {
-          const ref = block.asset._ref;
-          const parts = ref.split('-');
-          const assetId = parts[1];
-          const dimensions = parts[2];
-          const extension = parts[3];
-          const imageUrl = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'lg2rm1yc'}/${process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'}/${assetId}-${dimensions}.${extension}`;
-          
+        const imageUrl = getSanityImageUrl(block);
+        if (imageUrl) {
           const imageElement = (
             <div className="relative w-full h-96 rounded-lg border border-border-primary overflow-hidden hover:opacity-95 transition-opacity">
               <Image src={imageUrl} alt={block.alt || "Editorial Illustration"} fill className="object-cover" />
