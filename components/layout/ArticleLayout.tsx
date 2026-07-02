@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Container from "./Container";
 import Typography from "../typography/Typography";
@@ -7,6 +9,19 @@ import TableOfContents from "../navigation/TableOfContents";
 import ReadingProgress from "../shared/ReadingProgress";
 import Image from "next/image";
 import { formatDate } from "@/lib/date";
+import { useSpeechSynthesis } from "@/hooks/useSpeechSynthesis";
+import { extractArticleText } from "@/lib/speech/extractArticleText";
+import ListenButton from "../speech/ListenButton";
+import ArticleSpeechPlayer from "../speech/ArticleSpeechPlayer";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
+import ReadingResumeToast from "../shared/ReadingResumeToast";
+import { 
+  isBookmarked, 
+  isDownloaded, 
+  toggleBookmark, 
+  toggleDownload, 
+  addToHistory 
+} from "@/lib/storage/libraryStorage";
 
 interface ArticleLayoutProps {
   title: string;
@@ -19,6 +34,7 @@ interface ArticleLayoutProps {
   children: React.ReactNode;
   relatedBlock?: React.ReactNode;
   newsletterBlock?: React.ReactNode;
+  content?: any[] | null;
 }
 
 export default function ArticleLayout({
@@ -32,8 +48,63 @@ export default function ArticleLayout({
   children,
   relatedBlock,
   newsletterBlock,
+  content = [],
 }: ArticleLayoutProps) {
-  /* ponytail: central article/resources layout wrapper mapping correct responsive spacing grids */
+  const plainText = React.useMemo(() => extractArticleText(content), [content]);
+  const speech = useSpeechSynthesis(plainText);
+
+  const [savedBookmark, setSavedBookmark] = React.useState(false);
+  const [savedOffline, setSavedOffline] = React.useState(false);
+  const [pageSlug, setPageSlug] = React.useState("");
+
+  React.useEffect(() => {
+    // Resolve slug from URL on client side
+    const slug = window.location.pathname.replace(/^\/learn\//, '').replace(/\/$/, '');
+    setPageSlug(slug);
+    setSavedBookmark(isBookmarked(slug));
+    setSavedOffline(isDownloaded(slug));
+    
+    // Add to history list on mount
+    addToHistory({
+      slug,
+      title,
+      coverImageUrl,
+      readingTime,
+      authorName,
+      publishDate,
+      category,
+    });
+  }, [title, coverImageUrl, readingTime, authorName, publishDate, category]);
+
+  // Activate scroll progress tracker (only runs when pageSlug resolves)
+  useScrollProgress(pageSlug);
+
+  const handleToggleBookmark = () => {
+    const state = toggleBookmark({
+      slug: pageSlug,
+      title,
+      coverImageUrl,
+      readingTime,
+      authorName,
+      publishDate,
+      category,
+    });
+    setSavedBookmark(state);
+  };
+
+  const handleToggleDownload = () => {
+    const state = toggleDownload({
+      slug: pageSlug,
+      title,
+      content: content || [],
+      coverImageUrl,
+      readingTime,
+      authorName,
+      publishDate,
+      category,
+    });
+    setSavedOffline(state);
+  };
   return (
     <Container className="py-20 space-y-10 relative">
       <ReadingProgress />
@@ -64,6 +135,36 @@ export default function ArticleLayout({
           {readingTime && <span className="text-text-muted">•</span>}
           {readingTime && <span className="font-semibold text-link">{readingTime} min read</span>}
         </div>
+        <div className="pt-2 flex flex-wrap items-center gap-3">
+          <ListenButton
+            isPlaying={speech.isPlaying}
+            isPaused={speech.isPaused}
+            isSupported={speech.isSupported}
+            onPlay={speech.play}
+            onPause={speech.pause}
+            onResume={speech.resume}
+          />
+          <button
+            onClick={handleToggleBookmark}
+            className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold uppercase tracking-wider transition-all active:scale-98 cursor-pointer font-sans shadow-xs ${
+              savedBookmark
+                ? "border-link bg-bg-secondary text-link font-extrabold"
+                : "border-border-primary hover:bg-bg-secondary text-text-secondary hover:text-text-h"
+            }`}
+          >
+            {savedBookmark ? "Saved Bookmark" : "Bookmark"}
+          </button>
+          <button
+            onClick={handleToggleDownload}
+            className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold uppercase tracking-wider transition-all active:scale-98 cursor-pointer font-sans shadow-xs ${
+              savedOffline
+                ? "border-emerald-600 dark:border-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 font-extrabold"
+                : "border-border-primary hover:bg-bg-secondary text-text-secondary hover:text-text-h"
+            }`}
+          >
+            {savedOffline ? "Saved Offline" : "Download Offline"}
+          </button>
+        </div>
       </div>
 
       {coverImageUrl && (
@@ -91,6 +192,8 @@ export default function ArticleLayout({
           {relatedBlock}
         </div>
       </div>
+      <ArticleSpeechPlayer controller={speech} />
+      <ReadingResumeToast slug={pageSlug} />
     </Container>
   );
 }

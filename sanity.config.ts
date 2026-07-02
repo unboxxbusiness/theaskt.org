@@ -81,7 +81,7 @@ if (typeof window !== 'undefined') {
 }
 
 export default defineConfig({
-  name: 'default',
+  name: 'theaskt',
   title: 'TheAskt Studio',
 
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'mock-sanity-project-id',

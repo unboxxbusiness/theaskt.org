@@ -68,6 +68,10 @@ export const latestContentQuery = `*[_type == "article" && defined(slug.current)
   "slug": slug.current,
   publishedAt,
   excerpt,
+  isBreaking,
+  isLatest,
+  isFeatured,
+  isSponsored,
   "coverImageUrl": coverImage.asset->url,
   author->{
     name,

@@ -13,9 +13,9 @@ export async function GET(request: Request) {
 
   try {
     const searchTerm = `*${query}*`;
-    const groqQuery = `*[_type in ["article", "category", "tag", "author"] && (title match $searchTerm || name match $searchTerm) && defined(slug.current)][0...10]{
+    const groqQuery = `*[_type == "article" && title match $searchTerm && defined(slug.current)][0...10]{
       _type,
-      "title": coalesce(title, name),
+      title,
       "slug": slug.current
     }`;
 

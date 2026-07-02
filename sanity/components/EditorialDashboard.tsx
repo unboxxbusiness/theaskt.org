@@ -24,6 +24,9 @@ interface SanityDoc {
 export function EditorialDashboard() {
   const client = useClient({ apiVersion: '2023-01-01' });
   const currentUser = useCurrentUser();
+
+  const rawName = currentUser?.name || '';
+  const resolvedName = rawName === 'unboxxbusiness' || rawName === 'unboxx' ? 'TheAskt Editor' : (rawName || 'Editor');
   
   const [loading, setLoading] = useState(true);
   const [drafts, setDrafts] = useState<SanityDoc[]>([]);
@@ -36,7 +39,7 @@ export function EditorialDashboard() {
     async function fetchData() {
       try {
         setLoading(true);
-        const name = currentUser?.name || '';
+        const name = resolvedName;
         
         // Define today start time ISO string
         const todayStart = new Date();
@@ -48,23 +51,23 @@ export function EditorialDashboard() {
           _id, _type, title, _updatedAt, status, "authorName": author->name
         }`;
         
-        // 2. My Articles
-        const myQuery = `*[_type == "article" && author->name == $name] | order(_updatedAt desc)[0..4]{
+        // 2. My Articles (latest version only, prioritizing drafts)
+        const myQuery = `*[_type == "article" && author->name == $name && ((!(_id in path("drafts.**")) && !defined(*[_id == "drafts." + ^._id][0])) || (_id in path("drafts.**")))] | order(_updatedAt desc)[0..4]{
           _id, _type, title, _updatedAt, status, "authorName": author->name
         }`;
 
-        // 3. Scheduled Posts
-        const scheduledQuery = `*[_type == "article" && (status == "scheduled" || publishedAt > now())] | order(publishedAt asc)[0..4]{
+        // 3. Scheduled Posts (latest version only, prioritizing drafts)
+        const scheduledQuery = `*[_type == "article" && (status == "scheduled" || publishedAt > now()) && ((!(_id in path("drafts.**")) && !defined(*[_id == "drafts." + ^._id][0])) || (_id in path("drafts.**")))] | order(publishedAt asc)[0..4]{
           _id, _type, title, _updatedAt, publishedAt, status, "authorName": author->name
         }`;
 
-        // 4. Needs Review
-        const reviewQuery = `*[_type == "article" && status == "inReview"] | order(_updatedAt desc)[0..4]{
+        // 4. Needs Review (latest version only, prioritizing drafts)
+        const reviewQuery = `*[_type == "article" && status == "inReview" && ((!(_id in path("drafts.**")) && !defined(*[_id == "drafts." + ^._id][0])) || (_id in path("drafts.**")))] | order(_updatedAt desc)[0..4]{
           _id, _type, title, _updatedAt, status, "authorName": author->name
         }`;
 
-        // 5. Published Today
-        const publishedQuery = `*[_type == "article" && status == "published" && publishedAt >= $todayStart] | order(publishedAt desc)[0..4]{
+        // 5. Published Today (exclude drafts entirely)
+        const publishedQuery = `*[_type == "article" && !(_id in path("drafts.**")) && publishedAt >= $todayStart] | order(publishedAt desc)[0..4]{
           _id, _type, title, _updatedAt, publishedAt, status, "authorName": author->name
         }`;
 
@@ -178,7 +181,7 @@ export function EditorialDashboard() {
               Editorial Dashboard
             </Heading>
             <Text size={1} muted>
-              Welcome back, <span style={{ fontWeight: 600 }}>{currentUser?.name || 'Editor'}</span>! Here is your workspace status.
+              Welcome back, <span style={{ fontWeight: 600 }}>{resolvedName}</span>! Here is your workspace status.
             </Text>
           </Stack>
           <Button

@@ -125,6 +125,7 @@ export default function AnnouncementBar({ announcement }: AnnouncementProps) {
       <button
         onClick={handleDismiss}
         aria-label="Dismiss Announcement"
+        suppressHydrationWarning
         className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-white/50 hover:text-white transition-colors cursor-pointer bg-transparent border-none"
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">

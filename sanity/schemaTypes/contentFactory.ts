@@ -303,7 +303,6 @@ export function createContentSchema(name: string, title: string) {
         of: [{ type: 'reference', to: [{ type: 'article' }] }]
       }),
 
-      // 2. Editorial Workflow Status (moved to content group)
       defineField({
         name: 'status',
         title: 'Editorial Workflow Status',
@@ -320,6 +319,38 @@ export function createContentSchema(name: string, title: string) {
           ]
         },
         initialValue: 'draft'
+      }),
+      defineField({
+        name: 'isBreaking',
+        title: 'Breaking News',
+        type: 'boolean',
+        group: 'content',
+        initialValue: false,
+        description: 'Mark this article as Breaking News to display in headers/alerts.'
+      }),
+      defineField({
+        name: 'isLatest',
+        title: 'Latest News',
+        type: 'boolean',
+        group: 'content',
+        initialValue: true,
+        description: 'Mark this article to list under the Latest Opportunity feeds.'
+      }),
+      defineField({
+        name: 'isFeatured',
+        title: 'Featured Article',
+        type: 'boolean',
+        group: 'content',
+        initialValue: false,
+        description: 'Mark this article as Featured to highlight it on the homepage hero grids.'
+      }),
+      defineField({
+        name: 'isSponsored',
+        title: 'Sponsored Content',
+        type: 'boolean',
+        group: 'content',
+        initialValue: false,
+        description: 'Mark this article as Sponsored advertisement/promo.'
       }),
       defineField({
         name: 'readTime',

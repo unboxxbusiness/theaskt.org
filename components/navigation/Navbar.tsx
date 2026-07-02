@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import SearchDialog from './SearchDialog';
 import ReadingPreferences from '../shared/ReadingPreferences';
+import LibraryNavIcon from './LibraryNavIcon';
 
 // ponytail: single mapping object for social media SVGs
 const socialIcons: Record<string, React.ReactNode> = {
@@ -152,6 +153,7 @@ export default function Navbar({ settings }: NavbarProps) {
                           }}
                           aria-expanded={openDropdown === idx}
                           aria-haspopup="true"
+                          suppressHydrationWarning
                           className="flex items-center gap-1 hover:text-nav-hover transition-colors cursor-pointer py-1"
                         >
                            {item.label} <span className="text-[7px]">▼</span>
@@ -198,6 +200,7 @@ export default function Navbar({ settings }: NavbarProps) {
                 <Search className="h-3.5 w-3.5" />
                 <span>Search</span>
               </button>
+              <LibraryNavIcon className="h-8 w-8" />
               <ReadingPreferences />
               <Link
                 href="/career-program"
@@ -227,7 +230,9 @@ export default function Navbar({ settings }: NavbarProps) {
                 >
                   <Search className="h-4.5 w-4.5" />
                 </button>
-                
+
+                <LibraryNavIcon className="h-9 w-9" />
+
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   aria-expanded={mobileMenuOpen}
