@@ -17,6 +17,29 @@ export default function InstallBanner() {
   useEffect(() => {
     if (focusMode) return;
 
+    // 1. Check if already running in PWA standalone display mode
+    const isStandalone = 
+      window.matchMedia("(display-mode: standalone)").matches || 
+      (window.navigator as any).standalone === true;
+
+    if (isStandalone) {
+      try {
+        localStorage.setItem("pwa_installed", "true");
+      } catch (err) {
+        console.error(err);
+      }
+      return;
+    }
+
+    // 2. Check if cached as installed in local storage
+    try {
+      if (localStorage.getItem("pwa_installed") === "true") {
+        return;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
     let timer: NodeJS.Timeout;
 
     const checkAndShowBanner = (prompt: any) => {
@@ -57,12 +80,28 @@ export default function InstallBanner() {
 
     // Hide if installed externally (e.g. from footer link)
     const handleInstalledExternally = () => {
+      try {
+        localStorage.setItem("pwa_installed", "true");
+      } catch (err) {
+        console.error(err);
+      }
       setShowBanner(false);
       setDeferredPrompt(null);
     };
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstall);
     window.addEventListener("pwa-installed", handleInstalledExternally);
+    
+    // Listen to native browser appinstalled event
+    const handleNativeInstall = () => {
+      try {
+        localStorage.setItem("pwa_installed", "true");
+      } catch (err) {
+        console.error(err);
+      }
+      setShowBanner(false);
+    };
+    window.addEventListener("appinstalled", handleNativeInstall);
 
     // Run fallback check if event already fired prior to component mount
     if ((window as any).deferredAppInstallPrompt) {
@@ -74,6 +113,7 @@ export default function InstallBanner() {
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstall);
       window.removeEventListener("pwa-installed", handleInstalledExternally);
+      window.removeEventListener("appinstalled", handleNativeInstall);
       if (timer) clearTimeout(timer);
     };
   }, [focusMode]);

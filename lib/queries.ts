@@ -108,6 +108,10 @@ export const contentDetailQuery = `*[_type == "article" && slug.current == $slug
   noIndex,
   "ogImageUrl": ogImage.asset->url,
   showNewsletter,
+  sources[]{
+    title,
+    url
+  },
   "coverImageUrl": coverImage.asset->url,
   author->{
     name,

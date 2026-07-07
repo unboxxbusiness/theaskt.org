@@ -228,6 +228,51 @@ export default function CustomPortableText({ value }: { value: any[] | null | un
           );
         }
 
+        // Render simpleTable block
+        if (block._type === 'simpleTable') {
+          let tableRows: string[][] = [];
+          if (block.csvData) {
+            tableRows = block.csvData
+              .split('\n')
+              .filter(Boolean)
+              .map((line: string) => line.split('\t'));
+          } else if (block.rows && Array.isArray(block.rows)) {
+            tableRows = block.rows.map((row: any) => row.cells || []);
+          }
+
+          if (tableRows.length === 0) return null;
+          const [headerRow, ...bodyRows] = tableRows;
+
+          return (
+            <div key={index} className="overflow-x-auto my-8 border border-border-primary rounded-xl shadow-sm">
+              <table className="min-w-full divide-y divide-border-primary text-left border-collapse text-sm sm:text-base font-sans">
+                {headerRow && (
+                  <thead className="bg-bg-secondary">
+                    <tr>
+                      {headerRow.map((cell: string, idx: number) => (
+                        <th key={idx} className="px-5 py-3 font-semibold text-text-h">
+                          {cell}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                )}
+                <tbody className="divide-y divide-border-primary bg-bg-primary">
+                  {bodyRows.map((row: string[], rIdx: number) => (
+                    <tr key={rIdx} className="hover:bg-bg-secondary/40 transition-colors">
+                      {row.map((cell: string, cIdx: number) => (
+                        <td key={cIdx} className="px-5 py-3.5 text-text-body">
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+
         return null;
       })}
     </div>

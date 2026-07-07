@@ -392,7 +392,68 @@ export function createContentSchema(name: string, title: string) {
         initialValue: 'summary_large_image'
       }),
       defineField({ name: 'noIndex', title: 'Exclude from Search Engines (noindex)', type: 'boolean', initialValue: false, group: 'seo' }),
-      defineField({ name: 'showNewsletter', title: 'Show Newsletter Form', type: 'boolean', initialValue: true, group: 'seo' })
+      defineField({ name: 'showNewsletter', title: 'Show Newsletter Form', type: 'boolean', initialValue: true, group: 'seo' }),
+      
+      // AI Search & Structured Data Schema Enhancements (Washington Post Style)
+      defineField({ 
+        name: 'primaryKeyword', 
+        title: 'Primary Target Keyword', 
+        type: 'string', 
+        group: 'seo',
+        description: 'The main search query you want this article to rank for.'
+      }),
+      defineField({ 
+        name: 'secondaryKeywords', 
+        title: 'Secondary Keywords', 
+        type: 'array', 
+        of: [{ type: 'string' }],
+        group: 'seo',
+        description: 'Related keywords or search terms.'
+      }),
+      defineField({ 
+        name: 'tldr', 
+        title: 'Key Highlights / TL;DR Summary', 
+        type: 'array', 
+        of: [{ type: 'string' }],
+        group: 'seo',
+        description: 'Core takeaways used for AI search summary generation.'
+      }),
+      defineField({ 
+        name: 'faqs', 
+        title: 'FAQ Rich Snippet Data', 
+        type: 'array', 
+        of: [
+          {
+            type: 'object',
+            name: 'faqItem',
+            title: 'FAQ Item',
+            fields: [
+              { name: 'question', type: 'string', title: 'Question' },
+              { name: 'answer', type: 'text', title: 'Answer', rows: 3 }
+            ]
+          }
+        ],
+        group: 'seo',
+        description: 'Structured FAQPage questions and answers for Google Rich Snippets.'
+      }),
+      defineField({ 
+        name: 'sources', 
+        title: 'Authenticity Sources / Reference Links', 
+        type: 'array', 
+        of: [
+          {
+            type: 'object',
+            name: 'sourceItem',
+            title: 'Source Reference',
+            fields: [
+              { name: 'title', type: 'string', title: 'Source Name' },
+              { name: 'url', type: 'url', title: 'Reference URL' }
+            ]
+          }
+        ],
+        group: 'seo',
+        description: 'Outbound links to official portals or authority sources to verify the information and improve E-E-A-T score.'
+      })
     ]
   });
 }

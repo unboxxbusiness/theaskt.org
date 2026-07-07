@@ -185,6 +185,7 @@ export default async function LearnArticle({ params }: PageProps) {
       newsletterBlock={newsletterBlock}
       relatedBlock={relatedBlock}
       content={content}
+      sources={article.sources}
     >
       <script
         type="application/ld+json"

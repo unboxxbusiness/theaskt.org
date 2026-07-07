@@ -86,6 +86,7 @@ export default function SocialShare({ url, title = "Check this out!", className 
       <button
         onClick={handleCopy}
         title="Copy Link"
+        suppressHydrationWarning
         className="p-1.5 rounded-full border border-border-primary hover:bg-bg-secondary text-text-secondary hover:text-text-h transition-colors cursor-pointer"
       >
         {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Link2 className="h-3.5 w-3.5" />}

@@ -35,6 +35,7 @@ interface ArticleLayoutProps {
   relatedBlock?: React.ReactNode;
   newsletterBlock?: React.ReactNode;
   content?: any[] | null;
+  sources?: Array<{ title: string; url: string }> | null;
 }
 
 export default function ArticleLayout({
@@ -49,6 +50,7 @@ export default function ArticleLayout({
   relatedBlock,
   newsletterBlock,
   content = [],
+  sources = [],
 }: ArticleLayoutProps) {
   const plainText = React.useMemo(() => extractArticleText(content), [content]);
   const speech = useSpeechSynthesis(plainText);
@@ -146,6 +148,7 @@ export default function ArticleLayout({
           />
           <button
             onClick={handleToggleBookmark}
+            suppressHydrationWarning
             className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold uppercase tracking-wider transition-all active:scale-98 cursor-pointer font-sans shadow-xs ${
               savedBookmark
                 ? "border-link bg-bg-secondary text-link font-extrabold"
@@ -156,6 +159,7 @@ export default function ArticleLayout({
           </button>
           <button
             onClick={handleToggleDownload}
+            suppressHydrationWarning
             className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-bold uppercase tracking-wider transition-all active:scale-98 cursor-pointer font-sans shadow-xs ${
               savedOffline
                 ? "border-emerald-600 dark:border-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 font-extrabold"
@@ -182,6 +186,26 @@ export default function ArticleLayout({
           <div className="prose prose-sm dark:prose-invert max-w-3xl text-text-body space-y-6">
             {children}
           </div>
+
+          {sources && sources.length > 0 && (
+            <div className="pt-6 mt-8 border-t border-border-primary text-xs text-text-secondary space-y-2 max-w-3xl font-sans">
+              <p className="font-semibold text-text-h">Sources:</p>
+              <ul className="list-disc list-inside space-y-1.5">
+                {sources.map((source, idx) => (
+                  <li key={idx}>
+                    <a 
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-link hover:text-link-hover hover:underline transition-colors break-all"
+                    >
+                      {source.title} — {source.url}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="lg:col-span-4 space-y-8">
           {/* Desktop Table of Contents - sticky sidebar */}

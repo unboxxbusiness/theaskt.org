@@ -1,0 +1,239 @@
+{
+  "_type": "article",
+  "_id": "drafts.article-singapore-ai-safety-fellowship-2026",
+  "title": "Singapore AI Safety Fellowship (SASH) 2026: Fully Funded 3-Month Research Program",
+  "slug": {
+    "_type": "slug",
+    "current": "singapore-ai-safety-fellowship-2026"
+  },
+  "publishedAt": "2026-07-07T15:20:00.000Z",
+  "excerpt": "The Singapore AI Safety Hub has opened applications for the Singapore AI Safety Fellowship (SASH) 2026. This fully funded three-month residential program offers SGD $5,000/month, housing, and access to $30,000 USD in compute resources.",
+  "status": "draft",
+  "isLatest": true,
+  "isFeatured": false,
+  "isBreaking": false,
+  "seoTitle": "Singapore AI Safety Fellowship (SASH) 2026 | TheAskt",
+  "seoDescription": "Apply for the fully funded Singapore AI Safety Fellowship (SASH) 2026. SGD $5,000/month stipend, housing, and compute budget. Deadline July 10, 2026.",
+  "showNewsletter": true,
+  "primaryKeyword": "Singapore AI Safety Fellowship 2026",
+  "secondaryKeywords": [
+    "SASH 2026 application",
+    "AI alignment research fellowship",
+    "Singapore AI Safety Hub"
+  ],
+  "tldr": [
+    "SASH 2026 is a fully funded 3-month residential fellowship in Singapore focusing on technical AI safety and governance.",
+    "Fellows receive a monthly stipend of $5,000 SGD, fully covered housing, travel support, and up to $30,000 USD in compute resources.",
+    "The application deadline is fast approaching on July 10, 2026, targeting technical researchers and engineers."
+  ],
+  "faqs": [
+    {
+      "question": "What are the eligibility requirements for SASH 2026?",
+      "answer": "The fellowship targets emerging technical researchers, machine learning engineers, and policy specialists with a strong track record of technical work."
+    },
+    {
+      "question": "What resources are provided for research compute?",
+      "answer": "Approved projects will gain access to up to $30,000 USD in cloud compute budgets."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Singapore AI Safety Fellowship Program Page",
+      "url": "https://www.aisafety.sg/programs/singapore-ai-safety-fellowship"
+    },
+    {
+      "title": "Singapore AI Safety Hub Official Website",
+      "url": "https://www.aisafety.sg/"
+    }
+  ],
+  "content": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "For technical researchers and engineers looking to make a global impact on the future of artificial intelligence, a premier international opportunity has emerged. The Singapore AI Safety Hub (SASH) has opened applications for the Singapore AI Safety Fellowship 2026—a fully funded residential research program in Singapore."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What is Happening?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "The Singapore AI Safety Fellowship is a three-month, in-person residential program hosted in SASH's central workspace in Singapore's Chinatown. Running from September to December 2026, the fellowship brings together emerging researchers, policymakers, and industry experts from across the globe to conduct technical safety, alignment, and governance research."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Key Fellowship Benefits"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "To allow fellows to focus entirely on their research, the program offers a highly comprehensive, fully funded support package:"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Stipend: A monthly living allowance of $5,000 SGD to cover standard expenses."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Housing & Travel: Fully covered accommodation in Singapore and round-trip economy airfare."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Compute Budget: Up to $30,000 USD in dedicated cloud compute budgets for approved research models."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Mentorship: Weekly meetings with senior AI safety scientists and access to dedicated research managers."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Fellowship Program Breakdown"
+        }
+      ]
+    },
+    {
+      "_type": "simpleTable",
+      "csvData": "Requirement\tDetails\tTarget Criteria\nProgram Duration\t3 Months (Sept–Dec 2026)\tFull-time, in-person in Singapore\nMonthly Stipend\t$5,000 SGD\tPaid directly to fellows\nCompute Resources\tUp to $30,000 USD\tCloud compute credits for training\nApplication Deadline\tJuly 10, 2026\tStrict cut-off for research proposals"
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why It Matters"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "As frontier AI models grow exponentially in scale and capabilities, technical alignment research has become critical. The Singapore fellowship is uniquely positioned to bridge technical safety research with global AI policy. The program is model-agnostic, allowing fellows to collaborate on projects targeting neural network safety, reinforcement learning from human feedback (RLHF), and structural model evaluation."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "text": "This program fosters technical alignment expertise in a cross-cultural hub, helping build security guardrails for next-generation intelligence models."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What Candidates Should Do Next"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Review SASH's core research areas on the official site to align your proposal."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Draft a detailed, technical research proposal outlining your methodology and compute needs."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Submit your completed SASH application form before the final deadline on July 10, 2026."
+        }
+      ]
+    }
+  ]
+}

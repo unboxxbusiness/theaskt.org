@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node --max-old-space-size=4096 node_modules/next/dist/bin/next dev",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "generate": "node scripts/editorial.js --write",
+    "publish": "node scripts/editorial.js --publish"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

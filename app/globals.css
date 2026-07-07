@@ -66,17 +66,17 @@
   --warning: #F59E0B;
   --error: #EF4444;
 
-  /* Typography Scales Base */
-  --font-size-display: 60px;
-  --font-size-h1: 48px;
-  --font-size-h2: 36px;
-  --font-size-h3: 30px;
-  --font-size-h4: 24px;
-  --font-size-lead: 22px;
-  --font-size-body-large: 20px;
-  --font-size-body: 18px;
-  --font-size-small: 16px;
-  --font-size-caption: 14px;
+  /* Typography Scales Base (Optimized Professional Sizes) */
+  --font-size-display: 48px;
+  --font-size-h1: 36px;
+  --font-size-h2: 28px;
+  --font-size-h3: 22px;
+  --font-size-h4: 18px;
+  --font-size-lead: 18px;
+  --font-size-body-large: 18px;
+  --font-size-body: 16px;
+  --font-size-small: 14px;
+  --font-size-caption: 12px;
 
   --leading-heading: 1.25;
   --leading-body: 1.8;
@@ -86,10 +86,23 @@
 
 /* Fluid Font size overrides */
 html.pref-font-small {
+  --font-size-display: 40px;
+  --font-size-h1: 32px;
+  --font-size-h2: 24px;
+  --font-size-h3: 20px;
+  --font-size-h4: 16px;
+  --font-size-lead: 16px;
+  --font-size-body-large: 16px;
+  --font-size-body: 14px;
+  --font-size-small: 12px;
+  --font-size-caption: 11px;
+}
+
+html.pref-font-medium {
   --font-size-display: 48px;
   --font-size-h1: 36px;
   --font-size-h2: 28px;
-  --font-size-h3: 24px;
+  --font-size-h3: 22px;
   --font-size-h4: 18px;
   --font-size-lead: 18px;
   --font-size-body-large: 18px;
@@ -98,30 +111,17 @@ html.pref-font-small {
   --font-size-caption: 12px;
 }
 
-html.pref-font-medium {
-  --font-size-display: 60px;
-  --font-size-h1: 48px;
-  --font-size-h2: 36px;
-  --font-size-h3: 30px;
-  --font-size-h4: 24px;
-  --font-size-lead: 22px;
+html.pref-font-large {
+  --font-size-display: 56px;
+  --font-size-h1: 44px;
+  --font-size-h2: 32px;
+  --font-size-h3: 26px;
+  --font-size-h4: 22px;
+  --font-size-lead: 20px;
   --font-size-body-large: 20px;
   --font-size-body: 18px;
   --font-size-small: 16px;
   --font-size-caption: 14px;
-}
-
-html.pref-font-large {
-  --font-size-display: 72px;
-  --font-size-h1: 54px;
-  --font-size-h2: 42px;
-  --font-size-h3: 36px;
-  --font-size-h4: 28px;
-  --font-size-lead: 24px;
-  --font-size-body-large: 22px;
-  --font-size-body: 20px;
-  --font-size-small: 18px;
-  --font-size-caption: 16px;
 }
 
 /* Line height overrides */
