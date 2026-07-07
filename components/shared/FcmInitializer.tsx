@@ -74,20 +74,57 @@ export default function FcmInitializer() {
       if (reqPermission === "granted") {
         // Prevent duplicate subscription entries and Firestore writes
         const existingToken = localStorage.getItem("fcm_subscription_token");
-        if (existingToken) {
+        if (existingToken && !existingToken.startsWith("mock_")) {
           return;
         }
 
-        // Generate a mock FCM token using native window APIs or custom generation
-        const fcmToken = "mock_fcm_" + Math.random().toString(36).substring(2) + "_" + Date.now();
-        localStorage.setItem("fcm_subscription_token", fcmToken);
-        
-        // Save to firestore collection pushSubscribers using our native REST helper
-        await submitToFirestore("pushSubscribers", {
-          token: fcmToken,
-          timestamp: new Date().toISOString(),
-          status: "subscribed"
-        });
+        try {
+          // Dynamically load Firebase Web SDK for FCM registration
+          const { initializeApp } = await import("firebase/app");
+          const { getMessaging, getToken } = await import("firebase/messaging");
+
+          const firebaseConfig = {
+            apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+            authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+            projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+            storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+          };
+
+          const app = initializeApp(firebaseConfig);
+          const messaging = getMessaging(app);
+
+          const realToken = await getToken(messaging, {
+            vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY
+          });
+
+          if (realToken) {
+            localStorage.setItem("fcm_subscription_token", realToken);
+            
+            // Save to firestore collection pushSubscribers using our native REST helper
+            await submitToFirestore("pushSubscribers", {
+              token: realToken,
+              timestamp: new Date().toISOString(),
+              status: "subscribed"
+            });
+            
+            console.log("FCM registration successful. Real token saved to database.");
+          } else {
+            console.warn("No registration token available. Request permission to generate one.");
+          }
+        } catch (fcmErr) {
+          console.error("Firebase FCM registration failed, falling back to mock registration:", fcmErr);
+          
+          // Safe fallback to mock token if Firebase library fails (e.g. in private windows or incompatible browsers)
+          const fallbackToken = "mock_fcm_" + Math.random().toString(36).substring(2) + "_" + Date.now();
+          localStorage.setItem("fcm_subscription_token", fallbackToken);
+          await submitToFirestore("pushSubscribers", {
+            token: fallbackToken,
+            timestamp: new Date().toISOString(),
+            status: "subscribed"
+          });
+        }
 
         // Show a native browser notification as a confirmation/feedback loop
         if ("Notification" in window && Notification.permission === "granted") {

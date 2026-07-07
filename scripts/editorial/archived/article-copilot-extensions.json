@@ -1,0 +1,356 @@
+{
+  "_type": "article",
+  "_id": "drafts.article-copilot-extensions",
+  "title": "GitHub Copilot Extensions: Complete Developer & Integration Guide",
+  "slug": {
+    "_type": "slug",
+    "current": "github-copilot-extensions-developer-guide"
+  },
+  "excerpt": "GitHub has introduced Copilot Extensions, allowing developers to build custom AI tools and integrate third-party APIs directly into Copilot Chat. Explore the SDKs, agents vs skillsets comparison, and deployment workflow.",
+  "status": "draft",
+  "isLatest": true,
+  "isFeatured": false,
+  "isBreaking": false,
+  "showNewsletter": true,
+  "seoTitle": "GitHub Copilot Extensions: Custom Developer Chat Guide | TheAskt",
+  "seoDescription": "Learn how to build custom GitHub Copilot Extensions. Compare Skillsets vs Agents, explore official SDKs, and set up your local development environment.",
+  "primaryKeyword": "GitHub Copilot Extensions",
+  "secondaryKeywords": [
+    "build Copilot Extensions developer guide",
+    "GitHub Copilot API integration",
+    "custom Copilot Chat agent development"
+  ],
+  "tldr": [
+    "Copilot Extensions allow developers to connect custom databases and developer tools directly to Copilot Chat.",
+    "Developers can build extensions as either lightweight API Skillsets or fully custom Agent endpoints.",
+    "Extensions are registered as GitHub Apps and can be kept private, shared within organizations, or published in the Marketplace.",
+    "Official SDKs are provided for TypeScript, Python, Go, and .NET alongside a CLI debugger for local development."
+  ],
+  "faqs": [
+    {
+      "question": "Are Copilot Extensions free to build?",
+      "answer": "Yes. Registering a developer GitHub App and building the backend server is free. However, running custom agents that host their own LLM APIs may incur compute and token costs."
+    },
+    {
+      "question": "Can I use languages other than TypeScript?",
+      "answer": "Yes. While TypeScript is widely used, GitHub offers official SDK support and starter templates for TypeScript, Python, Go, Rust, Java, and .NET."
+    }
+  ],
+  "sources": [
+    {
+      "title": "GitHub Developer Portal",
+      "url": "https://github.com/"
+    },
+    {
+      "title": "GitHub Copilot Extensions Documentation",
+      "url": "https://gh.io/builder-docs"
+    }
+  ],
+  "content": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "GitHub has released the developer framework and builder documentation for Copilot Extensions. This framework allows developers to build custom integrations that run inside GitHub Copilot Chat in VS Code, Visual Studio, and github.com."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "TL;DR"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Copilot Extensions allow developers to connect custom databases and developer tools directly to Copilot Chat."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Developers can build extensions as either lightweight API Skillsets or fully custom Agent endpoints."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Extensions are registered as GitHub Apps and can be kept private, shared within organizations, or published in the Marketplace."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Official SDKs are provided for TypeScript, Python, Go, and .NET alongside a CLI debugger for local development."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What's Happening?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "GitHub has released the developer framework and builder documentation for Copilot Extensions. This framework allows developers to build custom integrations that run inside GitHub Copilot Chat in VS Code, Visual Studio, and github.com. Rather than being simple prompt wrappers, these extensions are full-fledged GitHub Apps that can query internal databases, trigger CI/CD pipelines, and interact with external systems."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why It Matters"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Developers can now access their custom tools and API endpoints directly inside their IDE chat without context switching. Using these extensions can reduce code shipping bottlenecks, as operations like reviewing logs or checking deployment status are handled via chat command interfaces."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "GitHub Copilot Extensions Architecture Options"
+        }
+      ]
+    },
+    {
+      "_type": "simpleTable",
+      "csvData": "Extension Approach\tImplementation Model\tKey Strengths\tIdeal Use Case\nSkillsets (Lightweight)\tDefines raw API endpoints called by Copilot\tZero prompt tuning, faster setup, model-agnostic\tSimple data retrieval (e.g. database lookups, query tools)\nAgents (Full Control)\tExposes custom LLM agent server endpoint\tCustom prompt logic, model choice, state management\tComplex multi-step workflows (e.g. CI/CD actions, codebase refactors)\nPrivate Apps\tInternal GitHub App registration\tHigh security, internal network integrations, custom APIs\tEnterprise developer tools, proprietary codebase interfaces\nMarketplace Apps\tPublic GitHub Marketplace publication\tGlobal developer reach, monetizable, discovery opportunities\tCommercial third-party developer integrations (e.g. Sentry, Datadog)"
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "The Opportunity"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Develop customized enterprise agents to onboard new engineers, allowing them to query internal documentation and codebase structures."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Build commercial third-party integrations and distribute them to millions of active developers on the GitHub Marketplace."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Accelerate daily engineering workflows by combining multiple developer tool triggers into single-line chat commands."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What Developers Should Do Next"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Visit the official GitHub Copilot Extensions builder portal and review the SDK repositories."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Decide whether your application is best suited as a lightweight API Skillset or a custom LLM-driven Agent."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Register a new GitHub App and configure the callback endpoints for your local development setup."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Use the Copilot CLI debugging tool to run and test your extension locally before deployment."
+        }
+      ]
+    },
+    {
+      "_type": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Key Takeaways"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Copilot Extensions integrate external APIs directly into VS Code and github.com Copilot Chat."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Built as GitHub Apps with support for private, organization-wide, or public sharing."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Choose between simpler API Skillsets or custom LLM-powered Agent servers."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Official SDKs support TypeScript, Python, Go, and .NET."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Official builder docs are hosted at gh.io/builder-docs."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Final Take"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Copilot Extensions represent a major evolution in how developers interact with their toolchains. By centering your engineering workflow around an integrated AI interface, you can eliminate context switching, automate repetitive scripts, and build a more intelligent development environment."
+        }
+      ]
+    }
+  ]
+}
