@@ -1,27 +1,38 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
+import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook';
 import { getFirestoreDocuments, sendFcmNotification } from '@/lib/firebase';
+
+const secret = process.env.SANITY_WEBHOOK_SECRET || "";
 
 export async function POST(request: Request) {
   try {
-    const authHeader = request.headers.get('Authorization');
-    const secret = process.env.SANITY_WEBHOOK_SECRET;
+    const signature = request.headers.get(SIGNATURE_HEADER_NAME) || "";
+    const rawBody = await request.text();
 
-    if (process.env.NODE_ENV === 'production' && !secret) {
-      console.error("Critical Security Error: SANITY_WEBHOOK_SECRET is missing in production.");
-      return NextResponse.json({ error: 'Configuration Error: Webhook secret is missing.' }, { status: 500 });
+    // Verify Sanity signature to ensure authentic origin
+    const valid = await isValidSignature(rawBody, signature, secret);
+    if (!valid) {
+      return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
 
-    if (secret && authHeader !== `Bearer ${secret}`) {
-      return NextResponse.json({ error: 'Unauthorized: Invalid webhook secret token.' }, { status: 401 });
-    }
-
-    const body = await request.json();
+    const body = JSON.parse(rawBody);
 
     // Check if the webhook payload represents a published article or guide
     const { _type, title, slug, excerpt } = body;
 
+    // ── Revalidate cached pages so new content appears instantly ──
+    revalidatePath('/', 'layout');       // Purge everything under root layout
+    revalidatePath('/');                 // Homepage
+    revalidatePath('/learn');            // Learn listing page
+
+    const slugStr = slug?.current || slug || '';
+    if (slugStr) {
+      revalidatePath(`/learn/${slugStr}`);  // The specific article page
+    }
+
     if (_type !== 'article' && _type !== 'guide') {
-      return NextResponse.json({ message: 'Ignored document type: ' + _type }, { status: 200 });
+      return NextResponse.json({ message: `Cache revalidated. Ignored notification for type: ${_type}` }, { status: 200 });
     }
 
     // Retrieve all active push subscriber tokens from Firestore
@@ -31,11 +42,10 @@ export async function POST(request: Request) {
       .map((sub) => sub.token);
 
     if (tokens.length === 0) {
-      return NextResponse.json({ message: 'No active push notification subscribers found.' }, { status: 200 });
+      return NextResponse.json({ message: 'Cache revalidated. No active push notification subscribers found.' }, { status: 200 });
     }
 
     // Extract the slug string format from Sanity schema reference or direct string
-    const slugStr = slug?.current || slug || '';
     const clickUrl = `https://theaskt.com/learn/${slugStr}`;
 
     // Send FCM notification
@@ -47,7 +57,7 @@ export async function POST(request: Request) {
     );
 
     return NextResponse.json({
-      message: 'Notification triggered successfully.',
+      message: 'Cache revalidated and notification triggered successfully.',
       recipientCount: tokens.length,
       result
     }, { status: 200 });

@@ -9,6 +9,16 @@ export const client = createClient({
   useCdn: process.env.NODE_ENV === 'production',
 });
 
+// Live client — always bypasses CDN to fetch fresh data directly from Sanity API
+// Used by webhook revalidation so that freshly published articles are visible immediately
+export const liveClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'lg2rm1yc',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  apiVersion: '2024-01-01',
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
+});
+
 export function getSanityImageUrl(source: any): string {
   if (!source) return '';
 

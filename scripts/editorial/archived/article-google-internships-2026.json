@@ -1,0 +1,430 @@
+{
+  "_type": "article",
+  "_id": "drafts.article-google-internships-2026",
+  "title": "Google Software Engineering Internships 2026: Preparation & Application",
+  "slug": {
+    "_type": "slug",
+    "current": "google-software-engineering-internships-2026"
+  },
+  "excerpt": "Google has opened applications for Software Engineering Internships for the 2026-27 cohort in India. Read about key eligibility parameters, interview processes, and preparation strategies.",
+  "status": "draft",
+  "isLatest": true,
+  "isFeatured": false,
+  "isBreaking": false,
+  "showNewsletter": true,
+  "seoTitle": "Google Software Engineering Internships 2026 | TheAskt",
+  "seoDescription": "Complete guide to applying for Google Software Engineering Internships in India for 2026. Discover role comparisons, eligibility criteria, and DSA interview tips.",
+  "primaryKeyword": "Google Software Engineering Internships",
+  "secondaryKeywords": [
+    "Google careers portal India",
+    "software engineering intern preparation",
+    "Google coding interview tips 2026"
+  ],
+  "tldr": [
+    "Google Software Engineering Internships are open for 2026-27 student cycles in India.",
+    "Candidates must be enrolled in a Bachelor's, Master's, or PhD in Computer Science or related fields.",
+    "The standard internship runs for 10 to 12 weeks and involves working on live product code.",
+    "Focus areas for screening are Data Structures, Algorithms, and clean coding in Java, Python, or C++."
+  ],
+  "faqs": [
+    {
+      "question": "Can I apply directly on third-party job boards?",
+      "answer": "No. While aggregators show these roles, all legitimate applications must be completed directly through the careers.google.com portal."
+    },
+    {
+      "question": "What coding languages are allowed in Google interviews?",
+      "answer": "Google interviews generally permit coding in C++, Java, Python, Go, or JavaScript. Candidates should select the language they are most fluent in."
+    }
+  ],
+  "sources": [
+    {
+      "title": "Google Careers Portal",
+      "url": "https://careers.google.com/"
+    },
+    {
+      "title": "Build Your Future with Google",
+      "url": "https://buildyourfuture.withgoogle.com/"
+    }
+  ],
+  "content": [
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Google has posted fresh software engineering internship listings for the 2026 academic calendar. These positions are distributed across major tech hubs, including Bangalore, Hyderabad, and Pune."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "TL;DR"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Google Software Engineering Internships are open for 2026-27 student cycles in India."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Candidates must be enrolled in a Bachelor's, Master's, or PhD in Computer Science or related fields."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "The standard internship runs for 10 to 12 weeks and involves working on live product code."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Focus areas for screening are Data Structures, Algorithms, and clean coding in Java, Python, or C++."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What's Happening?"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Google has posted fresh software engineering internship listings for the 2026 academic calendar. These positions are distributed across major tech hubs, including Bangalore, Hyderabad, and Pune."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Unlike general bulk hiring schemes, Google recruitments are rolling and team-specific. This means headcount is filled as applications come in, so students should submit their materials as early as possible."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "The internship lasts between 10 and 12 weeks, during which interns collaborate with full-time software engineers on core systems and real-world tools."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Why It Matters"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Secure a direct pathway to a Pre-Placement Offer (PPO) to join Google as a full-time Software Engineer after graduation."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Gain hands-on engineering experience in massive-scale distributed databases and machine learning pipelines."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Postings are filled quickly, and late submissions will not be reviewed once the cohort limits are reached."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "This makes preparing your resume and coding profiles ahead of the rollouts vital to getting noticed."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Google Tech Internships Roles Comparison"
+        }
+      ]
+    },
+    {
+      "_type": "simpleTable",
+      "csvData": "Internship Role\tLocation\tStudy Level Required\tCore Tech Stack\nSoftware Engineering Intern\tBangalore / Hyderabad\tBS, MS, or PhD (Computer Science)\tC++, Java, Python, Go\nApplication Engineering Intern\tBangalore\tBS/MS (CS, IT, or related field)\tJava, SQL, JavaScript, HTML\nSite Reliability Intern\tHyderabad\tBS, MS, or PhD (CS, EE, or related)\tPython, Go, C++, Linux Systems\nHardware Engineering Intern\tBangalore\tBS, MS, or PhD (Electrical/Computer Eng)\tVerilog, VHDL, C/C++"
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "The Opportunity"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Work on real-world projects that impact billions of global users daily."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Receive mentorship and training from senior engineering leads and tech team heads."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Build your professional network by interacting with other ambitious interns from top colleges."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Earn competitive stipends alongside paid corporate housing and travel allowances."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "What Students Should Do Next"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Visit the official Google Careers portal and search for active internship listings in India."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Optimize your resume to highlight technical projects, coding achievements, and core programming languages."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Submit your application alongside your official university transcripts in English."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Practice writing clean, compiler-free code on whiteboard screens using platforms like LeetCode and Google Student Hub."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "listItem": "bullet",
+      "level": 1,
+      "children": [
+        {
+          "_type": "span",
+          "text": "Study core computer science topics including trees, graphs, dynamic programming, and systems design."
+        }
+      ]
+    },
+    {
+      "_type": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Key Takeaways"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Applications are rolling and processed team-by-team."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Open to BS, MS, and PhD candidates in technical domains."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Internships span 10 to 12 weeks of active full-time work."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Focus heavily on Data Structures, Algorithms, and language efficiency."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "normal",
+      "children": [
+        {
+          "_type": "span",
+          "text": "✓ Official role postings are hosted on careers.google.com."
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "h2",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Final Take"
+        }
+      ]
+    },
+    {
+      "_type": "block",
+      "style": "blockquote",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Landing a Google software engineering internship is a career-defining achievement that hinges on rigorous technical preparation. Start refining your algorithm skills early, focus on coding complexity, and submit your application the moment listings appear to maximize your chances of getting scheduled for an interview."
+        }
+      ]
+    }
+  ]
+}
